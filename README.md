@@ -175,4 +175,8 @@
 
 ## 5.实现效果如下显示
 
+![alt text](images/second/image25.png)
+![alt text](images/second/image26.png)
+![alt text](images/second/image27.png)
+![alt text](images/second/image28.png)
 <video controls src="images/second/running.mp4" title="Title"></video>
