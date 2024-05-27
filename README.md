@@ -349,6 +349,7 @@ data.head()
     }
 
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -425,6 +426,7 @@ data.tail()
     }
 
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -597,6 +599,7 @@ data.loc[non_numberic_profits].head()
     }
 
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
