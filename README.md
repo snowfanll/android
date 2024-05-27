@@ -4,6 +4,7 @@
     <li><a href="#first">实验一</a></li>
     <li><a href="#second">实验二（一）</a></li>
     <li><a href="#second-second">实验二（二）</a></li>
+    <li><a href="#third">实验三</a></li>
 </ul>
 
 # <p id="first" style="text-align:center">实验一</p>
@@ -278,3 +279,467 @@
 图片:![alt text](images/third/image20.png)
 ![alt text](images/third/image21.png)
 运行视频录制：<video controls src="images/third/running.mp4" title="Title"></video>
+
+# <p id="third" style="text-alignt:center">实验三</p>
+
+## 一、排序
+
+```python
+# 选择排序 从大到小排序
+def selection_sort(a):
+    t=0
+    for j in range(len(a)):
+        maxx=0
+        for i in range(j,len(a)):
+            if maxx<a[i]:
+                maxx=a[i]
+                t=i
+        x=a[t]
+        a[t]=a[j]
+        a[j]=x
+```
+
+```python
+def test_sort():
+    a=list(map(int,input().split(",")))
+    selection_sort(a)
+    print(a)
+```
+
+```python
+# 排序  调用
+test_sort()
+```
+
+    5,2,3,6,9
+    [9, 6, 5, 3, 2]
+
+## 二、数据分析
+
+```python
+# 导包
+%matplotlib inline
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+```python
+# 读取文件
+data=pd.read_csv("fortune500.csv")
+```
+
+```python
+# 输出前5行
+data.head()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Rank</th>
+      <th>Company</th>
+      <th>Revenue (in millions)</th>
+      <th>Profit (in millions)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1955</td>
+      <td>1</td>
+      <td>General Motors</td>
+      <td>9823.5</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1955</td>
+      <td>2</td>
+      <td>Exxon Mobil</td>
+      <td>5661.4</td>
+      <td>584.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1955</td>
+      <td>3</td>
+      <td>U.S. Steel</td>
+      <td>3250.4</td>
+      <td>195.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1955</td>
+      <td>4</td>
+      <td>General Electric</td>
+      <td>2959.1</td>
+      <td>212.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1955</td>
+      <td>5</td>
+      <td>Esmark</td>
+      <td>2510.8</td>
+      <td>19.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+# 读取后5行
+data.tail()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Rank</th>
+      <th>Company</th>
+      <th>Revenue (in millions)</th>
+      <th>Profit (in millions)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>25495</th>
+      <td>2005</td>
+      <td>496</td>
+      <td>Wm. Wrigley Jr.</td>
+      <td>3648.6</td>
+      <td>493</td>
+    </tr>
+    <tr>
+      <th>25496</th>
+      <td>2005</td>
+      <td>497</td>
+      <td>Peabody Energy</td>
+      <td>3631.6</td>
+      <td>175.4</td>
+    </tr>
+    <tr>
+      <th>25497</th>
+      <td>2005</td>
+      <td>498</td>
+      <td>Wendy's International</td>
+      <td>3630.4</td>
+      <td>57.8</td>
+    </tr>
+    <tr>
+      <th>25498</th>
+      <td>2005</td>
+      <td>499</td>
+      <td>Kindred Healthcare</td>
+      <td>3616.6</td>
+      <td>70.6</td>
+    </tr>
+    <tr>
+      <th>25499</th>
+      <td>2005</td>
+      <td>500</td>
+      <td>Cincinnati Financial</td>
+      <td>3614.0</td>
+      <td>584</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+# 修改属性名称
+data.columns=['year', 'rank', 'company', 'revenue', 'profit']
+data.head()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>rank</th>
+      <th>company</th>
+      <th>revenue</th>
+      <th>profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1955</td>
+      <td>1</td>
+      <td>General Motors</td>
+      <td>9823.5</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1955</td>
+      <td>2</td>
+      <td>Exxon Mobil</td>
+      <td>5661.4</td>
+      <td>584.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1955</td>
+      <td>3</td>
+      <td>U.S. Steel</td>
+      <td>3250.4</td>
+      <td>195.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1955</td>
+      <td>4</td>
+      <td>General Electric</td>
+      <td>2959.1</td>
+      <td>212.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1955</td>
+      <td>5</td>
+      <td>Esmark</td>
+      <td>2510.8</td>
+      <td>19.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+len(data)
+```
+
+    25500
+
+```python
+# 得到各属性的类型
+data.dtypes
+```
+
+    year         int64
+    rank         int64
+    company     object
+    revenue    float64
+    profit      object
+    dtype: object
+
+```python
+# 对于profit类 期望结果是float类型 其中可能包含非数值型  利用正则表达式进行检查
+non_numberic_profits=data.profit.str.contains('[^0-9.-]')
+data.loc[non_numberic_profits].head()
+```
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>rank</th>
+      <th>company</th>
+      <th>revenue</th>
+      <th>profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>228</th>
+      <td>1955</td>
+      <td>229</td>
+      <td>Norton</td>
+      <td>135.0</td>
+      <td>N.A.</td>
+    </tr>
+    <tr>
+      <th>290</th>
+      <td>1955</td>
+      <td>291</td>
+      <td>Schlitz Brewing</td>
+      <td>100.0</td>
+      <td>N.A.</td>
+    </tr>
+    <tr>
+      <th>294</th>
+      <td>1955</td>
+      <td>295</td>
+      <td>Pacific Vegetable Oil</td>
+      <td>97.9</td>
+      <td>N.A.</td>
+    </tr>
+    <tr>
+      <th>296</th>
+      <td>1955</td>
+      <td>297</td>
+      <td>Liebmann Breweries</td>
+      <td>96.0</td>
+      <td>N.A.</td>
+    </tr>
+    <tr>
+      <th>352</th>
+      <td>1955</td>
+      <td>353</td>
+      <td>Minneapolis-Moline</td>
+      <td>77.4</td>
+      <td>N.A.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+```python
+len(data.profit[non_numberic_profits])
+```
+
+    369
+
+```python
+# 绘制柱形图
+bin_sizes, _, _ = plt.hist(data.year[non_numberic_profits], bins=range(1955, 2006))
+```
+
+![png](images/fourth/output_9_0.png)
+
+```python
+# 单独年份记录数都少于25条，即少于4%的比例 可以接受  直接删除
+data=data.loc[-non_numberic_profits]
+data.profit=data.profit.apply(pd.to_numeric)
+```
+
+```python
+len(data)
+```
+
+    25131
+
+```python
+data.dtypes
+```
+
+    year         int64
+    rank         int64
+    company     object
+    revenue    float64
+    profit     float64
+    dtype: object
+
+```python
+# 绘图
+group_by_year=data.loc[:,['year','revenue','profit']].groupby('year')
+avgs=group_by_year.mean()
+x=avgs.index
+y1=avgs.profit
+```
+
+```python
+def plot(x,y,ax,title,y_label):
+    ax.set_title(title)
+    ax.set_ylabel(y_label)
+    ax.plot(x,y)
+    ax.margins(x=0,y=0)
+```
+
+```python
+# 绘图
+fig,ax=plt.subplots()
+plot(x,y1,ax,'Increase in mean Fortune 500 company profits from 1955 to 2005', 'Profit (millions)')
+```
+
+![png](images/fourth/output_15_0.png)
+
+```python
+y2 = avgs.revenue
+fig, ax = plt.subplots()
+plot(x, y2, ax, 'Increase in mean Fortune 500 company revenues from 1955 to 2005', 'Revenue (millions)')
+```
+
+![png](images/fourth/output_16_0.png)
+
+```python
+def plot_with_std(x, y, stds, ax, title, y_label):
+    ax.fill_between(x, y - stds, y + stds, alpha=0.2)
+    plot(x, y, ax, title, y_label)
+```
+
+```python
+fig, (ax1, ax2) = plt.subplots(ncols=2)
+title = 'Increase in mean and std Fortune 500 company %s from 1955 to 2005'
+stds1 = group_by_year.std().profit.values
+stds2 = group_by_year.std().revenue.values
+plot_with_std(x, y1.values, stds1, ax1, title % 'profits', 'Profit (millions)')
+plot_with_std(x, y2.values, stds2, ax2, title % 'revenues', 'Revenue (millions)')
+fig.set_size_inches(14, 4)
+fig.tight_layout()
+```
+
+![png](images/fourth/output_18_0.png)
+
+```python
+
+```
