@@ -5,6 +5,7 @@
     <li><a href="#second">实验二（一）</a></li>
     <li><a href="#second-second">实验二（二）</a></li>
     <li><a href="#third">实验三</a></li>
+    <li><a href="#fourth">实验四</a></li>
 </ul>
 
 # <p id="first" style="text-align:center">实验一</p>
@@ -735,3 +736,54 @@ fig.tight_layout()
 ```python
 
 ```
+
+
+# <p id="fourth" style="text-alignt:center">实验四</p>
+## 一、下载
+### &emsp;1.直接访问github链接下载代码的zip包，并解压到工作目录中。
+## 二、对TFLClassify-main进行更新
+### &emsp;1.对TFLClassify-main进行处理，使其能够适应当前版本的Android;
+### &emsp;2.对grandle进行升级(修改grandle的版本和使用的kotlin的版本)
+![alt text](images/five/image1.png)
+### &emsp;3.修改build.grandle(Module:finish/start)
+<p>&emsp;&emsp;&emsp;(1) 添加namespace(当前的路径)</p>
+Module:finish/start：
+
+![alt text](images/five/image2.png)
+<p>&emsp;&emsp;&emsp;(2) 添加buildConfig</p>
+
+![alt text](images/five/image3.png)
+### &emsp;4. 修改Androidfest.xml文件(包括finish和start)
+<p>&emsp;&emsp;&emsp;(1)添加 android:exported 属性</p>
+
+![alt text](images/five/image4.png)
+## 三、向应用中添加TensorFlow Lite
+### &emsp;1.点击File，选择New->Other->TensorFlow Lite Model;
+### &emsp;2.选择finish模块中ml文件下的FlowerModel.tflite的模型
+### &emsp;3.完成模型导入，系统将自动下载模型的依赖包并将依赖项添加至模块的build.gradle文件；并生成摘要信息
+![alt text](images/five/image5.png)
+### &emsp;4.查看TODO列表视图，View>Tool Windows>TODO，可以查看尚未完成的地方（完成之后才截的图）
+![alt text](images/five/image6.png)
+### &emsp;5.添加代码
+<p>&emsp;&emsp;&emsp;1.定位“start”模块MainActivity.kt文件的TODO 1，添加初始化训练模型的代码</p>
+
+![alt text](images/five/image7.png)
+<p>&emsp;&emsp;&emsp;2、在CameraX的analyze方法内部，需要将摄像头的输入ImageProxy转化为Bitmap对象，并进一步转化为TensorImage 对象</p>
+
+![alt text](images/five/image8.png)
+<p>&emsp;&emsp;&emsp;3.对图像进行处理并生成结果：<br/>&emsp;&emsp;&emsp;&emsp;（1）按照属性score对识别结果按照概率从高到低排序<br/>&emsp;&emsp;&emsp;&emsp;（2）列出最高k种可能的结果，k的结果由常量MAX_RESULT_DISPLAY定义</p>
+
+![alt text](images/five/image9.png)
+<p>&emsp;&emsp;&emsp;4.将识别的结果加入数据对象Recognition 中，包含label和score两个元素。后续用于RecyclerView的数据显示</p>
+
+![alt text](images/five/image10.png)
+<p>&emsp;&emsp;&emsp;5、注释原先用于虚拟显示识别结果的代码</p>
+
+![alt text](images/five/image11.png)
+## 四、运行模块
+识别图片:<br/>
+<img src="images/five/image12.jpg" alt="雏菊" style="width:50%;height:500px">
+<img src="images/five/image13.jpg" alt="雏菊" style="width:50%;height:500px">
+
+<br/>视频:<br/>
+<video controls src="images/five/running.mp4" title="Title" style="width:50%;height:500px"></video>
