@@ -6,6 +6,8 @@
     <li><a href="#second-second">实验二（二）</a></li>
     <li><a href="#third">实验三</a></li>
     <li><a href="#fourth">实验四</a></li>
+    <li><a href="#five_first">实验五(一)</a></li>
+    <li><a href="#five_second">实验五(二)</a></li>
 </ul>
 
 # <p id="first" style="text-align:center">实验一</p>
@@ -787,3 +789,51 @@ Module:finish/start：
 
 <br/>视频:<br/>
 <video controls src="images/five/running.mp4" title="Title" style="width:50%;height:500px"></video>
+
+# <p id="five_first" style="text-alignt:center">实验五(一)</p>
+### &emsp;1.进入codespaces进行代码的编写，将当前的内核设置为python3.8
+### &emsp;2.安装程序运行必备的一些库
+![alt text](images/six/image1.png)
+![alt text](images/six/image2.png)
+![alt text](images/six/image3.png)
+### &emsp;3.导入相关的库
+![alt text](images/six/image4.png)
+### &emsp;4.获取数据
+![alt text](images/six/image5.png)
+### &emsp;5.加载数据集
+![alt text](images/six/image6.png)
+### &emsp;6.训练Tensorflow模型
+![alt text](images/six/image7.png)
+### &emsp;7.评估模型
+![alt text](images/six/image8.png)
+### &emsp;8.到处Tensorflowlite模型
+![alt text](images/six/image9.png)
+### &emsp;9.将model下载到D盘中,导回到花卉识别中
+![alt text](images/six/image10.png)
+### &emsp;10.运行结果
+<img src="images/six/image11.png" alt="玫瑰" style="width:50%;height:500px">
+<img src="images/six/image12.png" alt="雏菊" style="width:50%;height:500px">
+
+<br/>视频:<br/>
+<video controls src="images/six/running.mp4" title="Title" style="width:50%;height:500px"></video>
+
+# <p id="five_second" style="text-alignt:center">实验五(二)</p>
+### &emsp;1.利用wget下载训练集和测试集
+![alt text](images/seven/image1.png)
+### &emsp;2.在当前文件夹对训练集和测试集进行解压
+![alt text](images/seven/image2.png)
+![alt text](images/seven/image3.png)
+### &emsp;3.检测数据集的解压结果，打印相关信息
+![alt text](images/seven/image4.png)
+### &emsp;4.打印两张石头剪刀布训练集图片
+![alt text](images/seven/image5.png)
+![alt text](images/seven/image6.png)
+### &emsp;5.调用TensorFlow的keras进行数据模型的训练和评估，由于内存有限，所以将批处理的大小由126修改为36
+![alt text](images/seven/image7.png)
+![alt text](images/seven/image8.png)
+![alt text](images/seven/image9.png)
+![alt text](images/seven/image10.png)
+![alt text](images/seven/image11.png)
+### &emsp;6.绘制训练和验证结果的相关信息
+![alt text](images/seven/image12.png)
+![alt text](images/seven/image13.png)
