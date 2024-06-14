@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "history_entries")
+@Entity(tableName = "history_records")
 data class History(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,

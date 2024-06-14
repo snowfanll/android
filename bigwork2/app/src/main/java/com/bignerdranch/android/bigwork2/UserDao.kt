@@ -11,7 +11,7 @@ interface UserDao {
     @Insert
     fun insertUser(user: User)
 
-    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
+    @Query("SELECT * FROM users WHERE username = :username")
     fun getUserByUsername(username: String): User?
 
     @Nullable

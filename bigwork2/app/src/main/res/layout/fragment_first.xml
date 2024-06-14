@@ -5,24 +5,41 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+<!--    <EditText-->
+<!--        android:id="@+id/usernameEditText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Username"-->
+<!--        android:inputType="text" />-->
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="text" />
+        android:layout_height="45dp"
+        android:background="@drawable/gray_border_bg"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="11dp"
+        android:hint="UserName"
+        android:paddingLeft="10dp"/>
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        android:background="@drawable/gray_border_bg"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="11dp"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:paddingLeft="10dp"
+        android:inputType="textPassword"/>
+
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/blue_button_background"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
         android:text="登录" />
 
     <TextView
@@ -36,7 +53,6 @@
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="注册" />
         android:text="注册" />
 
 </LinearLayout>

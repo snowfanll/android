@@ -11,6 +11,6 @@ interface HistoryDao {
     @Insert
     fun insertHistory(history: History)
 
-    @Query("SELECT * FROM history_entries ORDER BY id DESC")
+    @Query("SELECT * FROM history_records ORDER BY id DESC")
     fun getAllHistory(): Flow<List<History>>
 }

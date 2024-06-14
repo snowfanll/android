@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="noActionbarColorPrimary" format="reference|color"/>
+    <attr name="bottomBackground" format="reference|color"/>
+    <attr name="editBackgroundTint" format="reference|color"/>
+    <attr name="editTextColor" format="reference|color"/>
+    <attr name="editTextHintColor" format="reference|color"/>
+    <attr name="btnBackgroundTint" format="reference|color"/>
+    <attr name="nevBackgroundTint" format="reference|color"/>
+    <attr name="nevItemBackgroundTint" format="reference|color"/>
+    <attr name="windowBackground" format="reference|color"/>
+    <attr name="listItemColor" format="reference|color"/>
+</resources>

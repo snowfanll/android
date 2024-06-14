@@ -41,8 +41,8 @@ class SecondFragment : Fragment() {
         userDao = UserDataBase.getDatabase(requireContext()).userDao()
 
         binding.registerButton.setOnClickListener {
-            val username = binding.newUsernameEditText.text.toString()
-            val password = binding.newPasswordEditText.text.toString()
+            val username = binding.userName.text.toString()
+            val password = binding.password.text.toString()
 
             if (username.isNotEmpty() && password.isNotEmpty()) {
                 registerUser(username, password)

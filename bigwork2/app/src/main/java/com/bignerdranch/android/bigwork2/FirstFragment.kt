@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.bigwork2.databinding.FragmentFirstBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -39,22 +41,31 @@ class FirstFragment : Fragment() {
         userDao = UserDataBase.getDatabase(requireContext()).userDao()
 
         binding.loginButton.setOnClickListener {
-            val username = binding.usernameEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+            var username=binding.userName.text.toString()
+            val password = binding.password.text.toString()
 
-//            lifecycleScope.launch {
-//                if (validateCredentials(username, password)) {
-//                    findNavController().navigate(R.id.action_FirstFragment_to_SentimentAnalysisFragment)
-//                } else {
-//                    Toast.makeText(requireContext(), "Invalid credentials", Toast.LENGTH_SHORT).show()
-//                }
-//            }
+            lifecycleScope.launch {
+                // 将数据库操作放在 withContext(Dispatchers.IO) 代码块中运行，可以确保这些操作不会阻塞主线程
+                val user = withContext(Dispatchers.IO) {
+                    userDao.getUserByUsername(username)
+                }
+                if (user?.password==password) {
+                    findNavController().navigate(R.id.action_FirstFragment_to_homePageFragment)
+                } else {
+                    Toast.makeText(requireContext(), "账号或密码错误" , Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.registerButton.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
+//    private suspend fun validateCredentials(username: String, password: String): Boolean {
+//        val user = userDao.getUserByUsername(username)
+//        return user?.password == password //在调用一个可能为 null 的对象的方法或访问其属性时，避免出现空指针异常。
+//    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
