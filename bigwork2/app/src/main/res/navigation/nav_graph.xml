@@ -16,7 +16,11 @@
             app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_homePageFragment"
-            app:destination="@id/homePageFragment" />
+            app:destination="@id/HomePageFragment">
+            <argument
+                android:name="userName"
+                app:argType="string" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -29,8 +33,22 @@
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homePageFragment"
+        android:id="@+id/HomePageFragment"
         android:name="com.bignerdranch.android.bigwork2.HomePageFragment"
         android:label="home_page"
-        tools:layout="@layout/fragment_homepage" />
+        tools:layout="@layout/fragment_homepage" >
+        <argument android:name="userName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_HomePageFragment_to_historyRecordFragment"
+            app:destination="@id/historyRecordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyRecordFragment"
+        android:name="com.bignerdranch.android.bigwork2.HistoryRecordFragment"
+        android:label="HistoryRecordFragment"
+        tools:layout="@layout/fragment_history_record">
+        <argument android:name="userName"
+            app:argType="string" />
+    </fragment>
 </navigation>

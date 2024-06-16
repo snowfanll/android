@@ -1,24 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/historyRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="10dp"
-        android:clipToPadding="false"
-        tools:listitem="@layout/history_record_item" />
-
     <LinearLayout
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/gray_border_bg"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
@@ -30,7 +23,8 @@
             android:layout_weight="1"
             android:layout_marginStart="15dp"
             android:layout_marginTop="11dp"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:hint="根据日期/情感来进行查询"/>
 
         <ImageButton
             android:id="@+id/sendButton"
@@ -39,4 +33,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/search" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchLayout"
+        android:layout_marginTop="5dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/history_record_item" />
+
 </RelativeLayout>

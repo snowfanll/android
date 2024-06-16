@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.bigwork2.databinding.FragmentFirstBinding
@@ -35,8 +36,17 @@ class FirstFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        //当每次可见的时候都进行修改
+        super.onResume()
+        // 修改 Toolbar 标题
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "登录页面"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // 修改 Toolbar 标题
+//        (activity as? AppCompatActivity)?.supportActionBar?.title = "登录页面"
 
         userDao = UserDataBase.getDatabase(requireContext()).userDao()
 
@@ -50,7 +60,9 @@ class FirstFragment : Fragment() {
                     userDao.getUserByUsername(username)
                 }
                 if (user?.password==password) {
-                    findNavController().navigate(R.id.action_FirstFragment_to_homePageFragment)
+                    val action = FirstFragmentDirections.actionFirstFragmentToHomePageFragment(username)
+                    findNavController().navigate(action)
+
                 } else {
                     Toast.makeText(requireContext(), "账号或密码错误" , Toast.LENGTH_SHORT).show()
                 }
@@ -61,10 +73,8 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
-//    private suspend fun validateCredentials(username: String, password: String): Boolean {
-//        val user = userDao.getUserByUsername(username)
-//        return user?.password == password //在调用一个可能为 null 的对象的方法或访问其属性时，避免出现空指针异常。
-//    }
+
+
 
 
     override fun onDestroyView() {

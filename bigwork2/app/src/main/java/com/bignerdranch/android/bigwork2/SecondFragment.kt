@@ -1,11 +1,17 @@
 package com.bignerdranch.android.bigwork2
 
 import android.os.Bundle
+import android.util.Log
+import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.bigwork2.databinding.FragmentSecondBinding
@@ -33,6 +39,13 @@ class SecondFragment : Fragment() {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
 
+    }
+
+    override fun onResume() {
+        //当每次可见的时候都进行修改
+        super.onResume()
+        // 修改 Toolbar 标题
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "注册页面"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,6 +82,7 @@ class SecondFragment : Fragment() {
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

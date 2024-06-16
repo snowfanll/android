@@ -11,6 +11,14 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:hint="Username"-->
 <!--        android:inputType="text" />-->
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/icon"
+        />
     <EditText
         android:id="@+id/userName"
         android:layout_width="match_parent"
@@ -33,26 +41,29 @@
         android:inputType="textPassword"/>
 
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/blue_button_background"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="70dp"
-        android:text="登录" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Don't have an account? "
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button_background"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="right"
+            android:text="注册" />
 
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="注册" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_button_background"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="right"
+            android:text="登录" />
+
+    </LinearLayout>
 
 </LinearLayout>

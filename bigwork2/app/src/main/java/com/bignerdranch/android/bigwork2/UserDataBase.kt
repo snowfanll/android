@@ -9,11 +9,11 @@ import androidx.room.RoomDatabase
 abstract class UserDataBase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
-    abstract fun historyDao():HistoryDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         @Volatile
-        private var INSTANCE:UserDataBase? = null
+        private var INSTANCE: UserDataBase? = null
 
         fun getDatabase(context: Context): UserDataBase {
             return INSTANCE ?: synchronized(this) {
@@ -21,7 +21,7 @@ abstract class UserDataBase : RoomDatabase() {
                     context.applicationContext,
                     UserDataBase::class.java,
                     "user_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 instance
             }

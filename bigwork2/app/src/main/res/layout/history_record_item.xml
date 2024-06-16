@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:layout_editor_absoluteY="25dp">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+        android:orientation="vertical"
+        android:background="@drawable/gray_border_bg"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right">
         <TextView
-            android:id="@+id/history_address"
-            android:layout_width="match_parent"
+            android:id="@+id/timestamp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
-            android:text="history"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="5dp"
+            android:text="Timestamp" />
+        <TextView
+            android:id="@+id/sendText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Send Text" />
+
+        <TextView
+            android:id="@+id/analyseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Analyse Text" />
+
+        <TextView
+            android:id="@+id/responseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Response Text" />
     </LinearLayout>
+
 </LinearLayout>
