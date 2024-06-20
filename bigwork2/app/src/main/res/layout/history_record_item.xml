@@ -6,18 +6,20 @@
     android:padding="8dp">
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/gray_border_bg"
         android:layout_marginRight="10dp"
-        android:layout_gravity="right">
+        android:layout_gravity="right"
+        android:backgroundTint="@color/blue">
         <TextView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
+            android:textColor="@color/gray"
             android:text="Timestamp" />
         <TextView
             android:id="@+id/sendText"
@@ -27,20 +29,35 @@
             android:layout_marginTop="5dp"
             android:text="Send Text" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
         <TextView
             android:id="@+id/analyseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:text="Analyse Text" />
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:text="AnalyseText" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
 
         <TextView
             android:id="@+id/responseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
             android:text="Response Text" />
     </LinearLayout>

@@ -9,19 +9,22 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bignerdranch.android.bigwork2.databinding.FragmentHomepageBinding
+import com.example.tflitebigwork.TextAnalyzer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.tensorflow.lite.support.label.Category
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class HomePageFragment : Fragment() {
+class HomePageFragment : Fragment() , TextAnalyzer.TextResultsListener{
 
     private var _binding: FragmentHomepageBinding? = null
 
@@ -34,6 +37,9 @@ class HomePageFragment : Fragment() {
     private lateinit var historyAdapter: HistoryAdapter
 
     private lateinit var userName:String
+    private lateinit var sendText:String
+
+    private lateinit var textClassifier: TextAnalyzer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +63,15 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 初始化 TextClassificationHelper
+        textClassifier = TextAnalyzer(requireContext(), this)
+
         // 初始化 historyDao
         historyDao = UserDataBase.getDatabase(requireContext()).historyDao()
         // 初始化 historyAdapter，初始数据为空
-        historyAdapter = HistoryAdapter(emptyList())
+        historyAdapter = HistoryAdapter(emptyList()) { history ->
+            showDeleteSingleRecordDialog(history)
+        }
         // 配置 RecyclerView
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())  // 设置布局管理器
@@ -75,16 +86,24 @@ class HomePageFragment : Fragment() {
 
         // 发送按钮点击事件
         binding.sendButton.setOnClickListener {
-            val sendText = binding.sendTextView.text.toString()  // 获取输入的发送信息
-            val analysisText="分析"
-            val responseText = "自动回复信息"  // 自动回复信息的内容
+            sendText = binding.sendTextView.text.toString()  // 获取输入的发送信息
+//            val analysisText="分析"
+//            val responseText = "回复"  // 自动回复信息的内容
 
             if (sendText.isNotEmpty()) {
-                saveHistory(userName,sendText,analysisText,responseText)  // 保存历史记录
+                analyzeSentimentAndSaveHistory(sendText)
+//                saveHistory(userName,sendText,analysisText,responseText)  // 保存历史记录
                 binding.sendTextView.text.clear()  // 清空输入框
             }
         }
+
     }
+
+    private fun analyzeSentimentAndSaveHistory(sendText: String) {
+        textClassifier.classify(sendText)
+    }
+
+
     private fun loadHistory(username:String) {
         lifecycleScope.launch {
             val historyList = withContext(Dispatchers.IO) {
@@ -92,6 +111,35 @@ class HomePageFragment : Fragment() {
             }
             historyAdapter.updateHistory(historyList.reversed()) // 反转列表
         }
+    }
+
+    override fun onResult(results: List<Category>, inferenceTime: Long) {
+        var star_level = 0.0
+        var analysisText=""
+        var responseText=""
+        var i=0
+        for (str in results){
+
+            if (str.label == "1"){
+                star_level += str.score
+                analysisText +=  "positive:" + str.score
+            }else{
+                star_level -= str.score
+                analysisText +=  "negative:" + str.score
+            }
+            if(i<results.size-1)
+                analysisText+="\n"
+            i++
+        }
+        System.out.println(star_level)
+        if(star_level < -0.1){
+            responseText="消极"
+        }else if(star_level < 0.2){
+            responseText="中立"
+        }else{
+            responseText="积极"
+        }
+        saveHistory(userName, sendText, analysisText, responseText)
     }
 
     private fun saveHistory(username: String, sendText: String,analysisText:String, responseText: String) {
@@ -109,15 +157,31 @@ class HomePageFragment : Fragment() {
         }
     }
 
+
+    // 删除单个历史记录  长按删除
+    private fun showDeleteSingleRecordDialog(history: History) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("确认删除")
+            .setMessage("您确定要删除这条历史记录吗？")
+            .setPositiveButton("是") { dialog, which ->
+                lifecycleScope.launch {
+                    withContext(Dispatchers.IO) {
+                        historyDao.deleteHistory(history)
+                    }
+                    loadHistory(userName)  // 显示最新的5条
+                    Toast.makeText(context, "历史记录已删除", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("否", null)
+            .show()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_history, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.history_record -> {
                     // 如果当前在 SecondFragment，直接查看历史记录
@@ -136,4 +200,9 @@ class HomePageFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onError(error: String) {
+        Toast.makeText(requireContext(), "情感分析错误: $error", Toast.LENGTH_SHORT).show()
+    }
+
 }

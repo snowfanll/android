@@ -27,7 +27,7 @@
             android:hint="根据日期/情感来进行查询"/>
 
         <ImageButton
-            android:id="@+id/sendButton"
+            android:id="@+id/searchButton"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

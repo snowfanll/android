@@ -17,13 +17,13 @@ interface HistoryDao {
     @Query("SELECT * FROM history_records WHERE sendText != '' AND username = :username ORDER BY timestamp DESC")
     fun getHistoryByUser(username: String): List<History>
 
-    // 根据用户和指定日期获取历史记录
-    @Query("SELECT * FROM history_records WHERE username = :username AND (strftime('%Y-%m-%d', timestamp / 1000, 'unixepoch') = :date OR responseText = :responseText)")
-    fun getHistoryByUserAndDate(username: String, date: String,responseText:String): List<History>
+    // 根据情感来进行搜索
+    @Query("SELECT * FROM history_records WHERE username = :username AND responseText = :text ORDER BY timestamp DESC")
+    fun getHistoryByUserAndDateOrEmotion(username: String,text: String): List<History>
 
     // 删除所有历史记录
-    @Query("DELETE FROM history_records")
-    fun deleteAllHistory()
+    @Query("DELETE FROM history_records WHERE username=:username")
+    fun deleteAllHistory(username: String)
 
     // 删除单个历史记录
     @Delete
