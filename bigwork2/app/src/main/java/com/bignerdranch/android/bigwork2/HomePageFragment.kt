@@ -119,16 +119,14 @@ class HomePageFragment : Fragment() , TextAnalyzer.TextResultsListener{
         var responseText=""
         var i=0
         for (str in results){
-
-            if (str.label == "1"){
-                star_level += str.score
-                analysisText +=  "positive:" + str.score
-            }else{
-                star_level -= str.score
-                analysisText +=  "negative:" + str.score
-            }
+            analysisText += str.label + ":" + str.score
             if(i<results.size-1)
                 analysisText+="\n"
+            if (str.label == "positive"){
+                star_level += str.score
+            }else{
+                star_level -= str.score
+            }
             i++
         }
         System.out.println(star_level)
